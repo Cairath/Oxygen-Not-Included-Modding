@@ -1,22 +1,30 @@
 {
-  "name": "oxygen-not-included-modding",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Cairath/Oxygen-Not-Included-Modding.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Cairath/Oxygen-Not-Included-Modding/issues"
-  },
-  "homepage": "https://github.com/Cairath/Oxygen-Not-Included-Modding#readme",
-  "dependencies": {
-    "gitdown": "^3.1.2"
-  }
+    "name": "oxygen-not-included-modding",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "gulp",
+        "watch": "npm run watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Cairath/Oxygen-Not-Included-Modding.git"
+    },
+    "author": "",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/Cairath/Oxygen-Not-Included-Modding/issues"
+    },
+    "homepage": "https://github.com/Cairath/Oxygen-Not-Included-Modding#readme",
+    "dependencies": {
+        "gitdown": "^3.1.2"
+    },
+    "devDependencies": {
+        "@types/gulp": "^4.0.6",
+        "@types/node": "^13.1.8",
+        "gulp": "^4.0.2",
+        "ts-node": "^8.6.2",
+        "typescript": "^3.7.5"
+    }
 }
