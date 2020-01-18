@@ -1,0 +1,22 @@
+{
+  "name": "oxygen-not-included-modding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cairath/Oxygen-Not-Included-Modding.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cairath/Oxygen-Not-Included-Modding/issues"
+  },
+  "homepage": "https://github.com/Cairath/Oxygen-Not-Included-Modding#readme",
+  "dependencies": {
+    "gitdown": "^3.1.2"
+  }
+}
