@@ -51,22 +51,25 @@ gulp.task("toc", async () => {
             for (let i = 0; i < contentsLines.length; i++) {
                 const line = contentsLines[i];
 
-                const lineSearch = /^<!-- toc (?:(\d+) )?-->$/.exec(
-                    line.trim()
-                );
+                const lineSearch = /^<!-- toc(?:(.*))? -->$/.exec(line.trim());
                 if (lineSearch) {
                     const contentsBefore = contentsLines.slice(0, i);
                     const contentsAfter = contentsLines.slice(i + 1);
 
-                    const contentsToC = toc(contentsAfter.join("\n"));
+                    const tocOptions = {
+                        maxDepth: 6,
+                        headerSize: 2,
+                        ...(lineSearch[1] ? JSON.parse(lineSearch[1]) : {})
+                    };
+
+                    const contentsToC = toc(contentsAfter.join("\n"), {
+                        maxdepth: tocOptions.maxDepth
+                    });
 
                     contentsLines = [
                         ...contentsBefore,
-                        "#".repeat(
-                            lineSearch[1]
-                                ? Number.parseInt(lineSearch[1], 10)
-                                : 1
-                        ) + " Table of Contents",
+                        "#".repeat(tocOptions.headerSize) +
+                            " Table of Contents",
                         contentsToC.content,
                         ...contentsAfter
                     ];
@@ -93,20 +96,23 @@ gulp.task("toc", async () => {
         });
 
         for (let pageItem of pageToC.contents) {
-            pageItem = toc.linkify(pageItem);
+            if (pageItem.lvl <= 2) {
+                pageItem = toc.linkify(pageItem);
 
-            const linkEndIdx = (pageItem.content as string).indexOf("](") + 2;
-            pageItem.content =
-                pageItem.content.substring(0, linkEndIdx) +
-                pageToC.fileName +
-                pageItem.content.substring(linkEndIdx);
-            masterToC.push(pageItem);
+                const linkEndIdx =
+                    (pageItem.content as string).indexOf("](") + 2;
+                pageItem.content =
+                    pageItem.content.substring(0, linkEndIdx) +
+                    pageToC.fileName +
+                    pageItem.content.substring(linkEndIdx);
+                masterToC.push(pageItem);
+            }
         }
     }
 
     await fsp.writeFile(
         join(out, sidebarName),
-        toc.bullets(masterToC, { highest: 1 }) + "\n",
+        "\n" + toc.bullets(masterToC, { highest: 1 }) + "\n",
         {
             flag: fsc.O_APPEND
         }
@@ -122,7 +128,8 @@ gulp.task("copy-resources", () =>
 );
 
 gulp.task("doc", gulp.series("clean", "gitdown", "toc", "copy-resources"));
-
-gulp.task("watch", () => {
+gulp.task("watcher", () => {
     gulp.watch(["doc/**"], gulp.task("doc"));
 });
+
+gulp.task("watch", gulp.series("doc", "watcher"));
