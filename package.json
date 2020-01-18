@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "gulp",
-        "watch": "npm run watch"
+        "start": "gulp doc",
+        "watch": "gulp watch"
     },
     "repository": {
         "type": "git",
@@ -18,7 +18,8 @@
     },
     "homepage": "https://github.com/Cairath/Oxygen-Not-Included-Modding#readme",
     "dependencies": {
-        "gitdown": "^3.1.2"
+        "gitdown": "^3.1.2",
+        "markdown-toc": "^1.2.0"
     },
     "devDependencies": {
         "@types/gulp": "^4.0.6",
