@@ -3,6 +3,8 @@ import { promises as fsp, constants as fsc } from "fs";
 import { join, basename } from "path";
 import Gitdown from "gitdown";
 import toc from "markdown-toc";
+import gulpCopy from "gulp-copy";
+import gulpClean from "gulp-clean";
 
 const src = join(process.cwd(), "doc");
 const out = join(process.cwd(), "wiki");
@@ -113,8 +115,14 @@ gulp.task("toc", async () => {
     output.length = 0;
 });
 
-gulp.task("doc", gulp.series("gitdown", "toc"));
+gulp.task("clean", () => gulp.src("wiki/*").pipe(gulpClean()));
+
+gulp.task("copy-resources", () =>
+    gulp.src("doc/*/sections/*/**").pipe(gulpCopy("wiki", { prefix: 3 }))
+);
+
+gulp.task("doc", gulp.series("clean", "gitdown", "toc", "copy-resources"));
 
 gulp.task("watch", () => {
-    gulp.watch(["doc/**/*.md"], gulp.task("doc"));
+    gulp.watch(["doc/**"], gulp.task("doc"));
 });
