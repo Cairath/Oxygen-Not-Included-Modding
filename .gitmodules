@@ -1,0 +1,3 @@
+[submodule "wiki"]
+	path = wiki
+	url = ../Oxygen-Not-Included-Modding.wiki.git
