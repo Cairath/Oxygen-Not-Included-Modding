@@ -87,7 +87,12 @@ gulp.task("toc", async () => {
         }
     }
 
-    const masterToC: any[] = [];
+    const masterToC: any[] = [
+        {
+            content: `[Home](Home)`,
+            lvl: 1
+        }
+    ];
 
     for (const pageToC of ToCs) {
         masterToC.push({
