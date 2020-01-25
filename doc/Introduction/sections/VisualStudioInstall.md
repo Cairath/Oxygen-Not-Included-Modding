@@ -2,13 +2,9 @@
 
 Visual Studio is *huuuuuuuge*, but don't fret - you need only a few things.
 
-* In the **Workloads** tab, select *.NET desktop environment*
+In the **Workloads** tab, select *.NET desktop environment*
 
-    ![image](./img/vsinstall-1.png)
-
-* In the **Individual components** tab, select *.NET Framework 3.5 development tools*.
-  
-    ![image](./img/vsinstall-2.png)
+![image](./img/vsinstall-1.png)
 
 After it installs, you're good to go.  
   
