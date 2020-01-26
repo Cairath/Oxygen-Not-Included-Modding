@@ -10,4 +10,3 @@ The guide will focus on creating a mod that modifies the game logic, i.e. not ju
 {"gitdown": "include", "file": "./sections/VisualStudioInstall.md"}  
 {"gitdown": "include", "file": "./sections/Decompilation.md"}  
 {"gitdown": "include", "file": "./sections/YourFirstMod.md"}  
-{"gitdown": "include", "file": "./sections/PublishingToSteam.md"}  

@@ -2,7 +2,7 @@
 
 ### Download project template (optional)
 We've prepared a small mod template for Visual Studio that will allow you to create a project that already has references to external libraries and a few basic patches. You can download it [here](https://github.com/Cairath/Oxygen-Not-Included-Modding/raw/master/resources/ONI%20Mod.zip).
-To add it to VS, place the downloaded .zip (don't unpack it!) in `C:\Users\%USERNAME%\Documents\Visual Studio 2019\Templates\ProjectTemplates`.
+To add it to VS, place the downloaded .zip (don't unpack it!) in `%USERPROFILE%\Documents\Visual Studio 2019\Templates\ProjectTemplates`.
 
 ### New project
 Start Visual Studio. On the main screen select `Create a new project`, then follow one of the paths below depending on whether you downloaded the template above.
@@ -29,8 +29,7 @@ Once your project is created you will see a bunch of errors. It's time to import
   * `0Harmony.dll`
   * `UnityEngine.dll`
   * `UnityEngine.CoreModule.dll`
-
-Below we list other often used files that will not be needed in this mod, but you will most likely find yourself using them at some point:
+* Below we list other often used files that will not be needed in this mod, but you will most likely find yourself using them at some point:
   * `UnityEngine.UI.dll`
   * `Unity.TextMeshPro.dll`
   * `UnityEngine.ImageConversionModule.dll`
@@ -38,10 +37,91 @@ Below we list other often used files that will not be needed in this mod, but yo
 Once all files are in place, try to build your project (on the sidebar, right click the project name and click `Build`). It should now recognize all files and build with no issues.
 
 ### Game log
-The game output log is located in `C:\Users\%USERNAME%\AppData\LocalLow\Klei\Oxygen Not Included\output_log.txt`. This file will be your friend - create a shortcut somewhere accessible. Open with Notepad++. More details about how to work with the log will be published on another page.
+The game output log is located in `%USERPROFILE%\AppData\LocalLow\Klei\Oxygen Not Included\output_log.txt`. This file will be your friend - create a shortcut somewhere accessible. Open with Notepad++. More details about how to work with the log will be published on another page.
 
 ### First look at the code
-At this point you should be familiar with Harmony patches. If you aren't -- go back and read the documentation.
+At this point you should be familiar with Harmony patches. If you aren't -- go back and read the documentation. One of the main things you will be doing with modding is writing patches to modify the original game logic. There are a few ways of doing it, and now we'll cover the most basic one.
 
+This is an example of a patch class (file from the example project, [available here](https://github.com/Cairath/Oxygen-Not-Included-Modding/blob/master/examples/ONI%20Hello%20World%20Mod/ONIMod/Patches.cs)):
+```cs
+[HarmonyPatch(typeof(Db))]
+[HarmonyPatch("Initialize")]
+public class Db_Initialize_Patch
+{
+    public static void Prefix()
+    {
+        Debug.Log("I execute before Db.Initialize!");
+    }
 
+    public static void Postfix()
+    {
+        Debug.Log("I execute after Db.Initialize!");
+    }
+}
+```
 
+This one contains two patches (last chance to go read Harmony documentation!) that will be executed before and after `Db.Initialize()` in the original code. You can see the results of `Debug.Log()` in the aforementioned game log file.
+
+In the sample project, you will also find a `Mod_OnLoad` class, which contains an `OnLoad()` method that is called automatically by the game just after the mod is loaded. Other hooks will be described in another section.
+```cs
+public static class Mod_OnLoad
+{
+    public static void OnLoad()
+    {
+        Debug.Log("Hello world!");
+    }
+}
+```
+
+All patches need to reside somewhere - usually it's a bigger class with patches, or sometimes a few smaller ones if there's a logical need to divide them. Where you put the patch classes does not matter - but keep it tidy -- you'll have to return to the code later at some point, so don't do anything the future you will regret.
+
+The resulting file `Patches.cs` contains one `Patches` class which holds all the patches we'll use in the example mod. You do not need to do anything to register or execute them - the game will pick them up on its own and apply them when the game starts.
+
+```cs
+using Harmony;
+
+namespace ONIMod
+{
+	public class Patches
+	{
+		public static class Mod_OnLoad
+		{
+			public static void OnLoad()
+			{
+				Debug.Log("Hello world!");
+			}
+		}
+
+		[HarmonyPatch(typeof(Db))]
+		[HarmonyPatch("Initialize")]
+		public class Db_Initialize_Patch
+		{
+			public static void Prefix()
+			{
+				Debug.Log("I execute before Db.Initialize!");
+			}
+
+			public static void Postfix()
+			{
+				Debug.Log("I execute after Db.Initialize!");
+			}
+		}
+	}
+}
+```
+
+### Testing the mod
+Once you compile the mod, you have to move it to the game mod directory. 
+In `%USERPROFILE%\Documents\Klei\OxygenNotIncluded\mods` there are three folders:
+* `\Dev` - this is where mods in development should go. If a mod in this folder crashes, it will not be disabled automatically when the game restarts.
+* `\Steam` - mods to which you subscribe on Steam are automatically downloaded there. Mods will be auto-disabled upon a mod crash (of any mod).
+* `\Local` - locally installed mods, otherwise behaves as `\Steam`. 
+
+(Linux: `~/.config/unity3d/Klei/OxygenNotIncluded/mods`, Mac: *you've made a bad life decision, figure it out*)
+
+Each mod should have its own separate folder, so for example your `ExampleMod` path would look like this:
+`...\Klei\OxygenNotIncluded\mods\Dev\ExampleMod\ExampleMod.dll`. Once you've confirmed the file is in the correct place, you can launch the game and click the `MODS` button. Find your mod on the list, enable it then allow the game to restart.
+
+To verify the mod worked, you should open the game log and look for the two lines that your mod printed - `I execute before Db.Initialize!` and `I execute after Db.Initialize!`.
+
+If you found them - congratulations, you've succeeded with your first mod.
