@@ -117,7 +117,9 @@ In `%USERPROFILE%\Documents\Klei\OxygenNotIncluded\mods` there are three folders
 * `\Steam` - mods to which you subscribe on Steam are automatically downloaded there. Mods will be auto-disabled upon a mod crash (of any mod).
 * `\Local` - locally installed mods, otherwise behaves as `\Steam`. 
 
-(Linux: `~/.config/unity3d/Klei/OxygenNotIncluded/mods`, Mac: *you've made a bad life decision, figure it out*)
+On other platforms, you can find the directories here:
+* Linux: `~/.config/unity3d/Klei/OxygenNotIncluded/mods`
+* Mac: *you've made a bad life decision, you'll figure it out*
 
 Each mod should have its own separate folder, so for example your `ExampleMod` path would look like this:
 `...\Klei\OxygenNotIncluded\mods\Dev\ExampleMod\ExampleMod.dll`. Once you've confirmed the file is in the correct place, you can launch the game and click the `MODS` button. Find your mod on the list, enable it then allow the game to restart.
