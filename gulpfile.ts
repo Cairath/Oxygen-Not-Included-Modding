@@ -9,6 +9,8 @@ import gulpClean from "gulp-clean";
 const src = join(process.cwd(), "doc");
 const out = join(process.cwd(), "wiki");
 const sidebarName = "_Sidebar.md";
+const readmeName = "README.md";
+const readmeSrc = ".README";
 
 const output: string[] = [];
 
@@ -37,6 +39,10 @@ gulp.task("gitdown", async () => {
 
         output.push(outputFile);
     }
+    const gitdownReadme = await Gitdown.readFile(
+        join(process.cwd(), readmeSrc, readmeName)
+    );
+    await gitdownReadme.writeFile(join(process.cwd(), readmeName));
 });
 
 gulp.task("toc", async () => {

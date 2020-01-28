@@ -1,7 +1,8 @@
 ## Publishing to Steam using the Mod Uploader
 
 ### Downloading the uploader
-You will find the uploader in your Steam library under the name of `Oxygen Not Included Uploader`. Make sure to enable showing tools in the library first: ![image](./img/steam-uploader-1.png)
+You will find the uploader in your Steam library under the name of `Oxygen Not Included Uploader`. Make sure to enable showing tools in the library first:  
+![image](./img/steam-uploader-1.png)
 
 ### Uploading the mod
 The uploader tool lets you add and modify your existing mods. You need to prepare: 

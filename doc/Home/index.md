@@ -16,11 +16,11 @@ Have a look at the sidebar for a list of all things covered in these chapters.
 
 ### A DISCLAIMER
 
-This guide **_will not_** be teaching you programming nor Harmony. You will be expected to know this ahead of time and this guide will be assuming you have at least a basic understanding of the the technologies involved. More detail is available in the [Introduction](Introduction) section.
+This guide ***will not*** be teaching you programming nor Harmony. You will be expected to know this ahead of time and this guide will be assuming you have at least a basic understanding of the the technologies involved. More detail is available in the [Introduction](Introduction) section.
 
 ### DISCLAIMER 2 (Electric Boogaloo)
 
-Modding in Oxygen Not Included is only _partially_ officially supported. This is **_not_** an official API or library (as much as _certain people_ would like you to think), and what _is_ in the stock game is considered _experimental_. As such, expect the modding to be something that changes relatively often and understand the possibility that updates, particularly big ones, can (and often do) break mods. The staff at Klei are people too.
+Modding in Oxygen Not Included is only *partially* officially supported. This is ***not*** an official API or library (as much as *certain people* would like you to think), and what *is* in the stock game is considered *experimental*. As such, expect the modding to be something that changes relatively often and understand the possibility that updates, particularly big ones, can (and often do) break mods. The staff at Klei are people too.
 
 ## Need a Hand?
 
