@@ -66,13 +66,15 @@ gulp.task("toc", async () => {
                         maxdepth: tocOptions.maxDepth
                     });
 
-                    contentsLines = [
-                        ...contentsBefore,
-                        "#".repeat(tocOptions.headerSize) +
-                            " Table of Contents",
-                        contentsToC.content,
-                        ...contentsAfter
-                    ];
+                    contentsLines = contentsToC.content.length
+                        ? [
+                              ...contentsBefore,
+                              "#".repeat(tocOptions.headerSize) +
+                                  " Table of Contents",
+                              contentsToC.content,
+                              ...contentsAfter
+                          ]
+                        : [...contentsBefore, ...contentsAfter];
                     ToCs.push({
                         contents: contentsToC.json as any[],
                         fileName: basename(file, ".md")
