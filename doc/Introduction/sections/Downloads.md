@@ -9,6 +9,8 @@ Below you will find links to the required tools. All tools not marked as optiona
 This will be your primary tool for editing C# and browsing game code.  
 *Installation instructions will be presented in the next chapter of this guide.*
 
+Non-Windows platforms will need to use an alternative, but this will not be covered in this guide.
+
 ### dotPeek
 ***Download link:*** https://www.jetbrains.com/decompiler/download/#section=web-installer  
 Used to decompile game libraries to be able to read the source code.
