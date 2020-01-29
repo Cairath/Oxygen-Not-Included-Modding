@@ -4,4 +4,4 @@ Mods can be installed locally should the mod not be available on Steam, you want
 Other than mentioned above, the mod will function identally to one installed via Steam. If you want your mod to behave different upon a crash, see the development section for more info on the `mods\Dev` folder.
 
 ### Sharing Local Mods
-Nothing says you *have* to publish to Steam (and there are valid reasons not to), so you can simply place the folder containing your mod files into an archive (`.zip` or similar) and send it to whoever you which via whatever platform you desire. The person on the other end needs to simply unpack the archive and the game will load the mod.
+Nothing says you *have* to publish to Steam (and there are valid reasons not to), so you can simply place the folder containing your mod files into an archive (`.zip` or similar) and send it to whoever you wish via whatever platform you desire. The person on the other end needs to simply unpack the archive and the game will load the mod.
