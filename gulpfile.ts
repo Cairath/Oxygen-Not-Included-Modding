@@ -1,5 +1,5 @@
 import gulp from "gulp";
-import { promises as fsp, constants as fsc } from "fs";
+import fs from "fs";
 import { join, basename } from "path";
 import Gitdown from "gitdown";
 import toc from "markdown-toc";
@@ -20,11 +20,11 @@ interface IToC {
 }
 
 gulp.task("gitdown", async () => {
-    const contents = await fsp.readdir(src);
+    const contents = fs.readdirSync(src);
 
     for (const entryName of contents) {
         const entry = join(src, entryName);
-        const stats = await fsp.stat(entry);
+        const stats = fs.statSync(entry);
 
         let target = entry;
         let targetName = basename(target, ".md");
@@ -50,8 +50,7 @@ gulp.task("toc", async () => {
 
     for (const file of output) {
         if (basename(file) !== sidebarName) {
-            const fileHandle = await fsp.open(file, fsc.O_RDWR);
-            const contents = (await fileHandle.readFile()).toString();
+            const contents = fs.readFileSync(file).toString();
             let contentsLines = contents.split(/\n\r?/g);
 
             for (let i = 0; i < contentsLines.length; i++) {
@@ -65,11 +64,11 @@ gulp.task("toc", async () => {
                     const tocOptions = {
                         maxDepth: 6,
                         headerSize: 2,
-                        ...(lineSearch[1] ? JSON.parse(lineSearch[1]) : {})
+                        ...(lineSearch[1] ? JSON.parse(lineSearch[1]) : {}),
                     };
 
                     const contentsToC = toc(contentsAfter.join("\n"), {
-                        maxdepth: tocOptions.maxDepth
+                        maxdepth: tocOptions.maxDepth,
                     });
 
                     contentsLines = contentsToC.content.length
@@ -78,34 +77,32 @@ gulp.task("toc", async () => {
                               "#".repeat(tocOptions.headerSize) +
                                   " Table of Contents",
                               contentsToC.content,
-                              ...contentsAfter
+                              ...contentsAfter,
                           ]
                         : [...contentsBefore, ...contentsAfter];
                     ToCs.push({
                         contents: contentsToC.json as any[],
-                        fileName: basename(file, ".md")
+                        fileName: basename(file, ".md"),
                     });
                     break;
                 }
             }
 
-            await fileHandle.truncate();
-            await fileHandle.write(contentsLines.join("\n"), 0);
-            await fileHandle.close();
+            fs.writeFileSync(file, contentsLines.join("\n"));
         }
     }
 
     const masterToC: any[] = [
         {
             content: `[Home](Home)`,
-            lvl: 1
-        }
+            lvl: 1,
+        },
     ];
 
     for (const pageToC of ToCs) {
         masterToC.push({
             content: `[${pageToC.fileName}](${pageToC.fileName})`,
-            lvl: 1
+            lvl: 1,
         });
 
         for (let pageItem of pageToC.contents) {
@@ -123,12 +120,10 @@ gulp.task("toc", async () => {
         }
     }
 
-    await fsp.writeFile(
+    const sidebarExisting = fs.readFileSync(join(out, sidebarName));
+    fs.writeFileSync(
         join(out, sidebarName),
-        "\n" + toc.bullets(masterToC, { highest: 1 }) + "\n",
-        {
-            flag: fsc.O_APPEND
-        }
+        sidebarExisting + "\n" + toc.bullets(masterToC, { highest: 1 }) + "\n"
     );
 
     output.length = 0;
