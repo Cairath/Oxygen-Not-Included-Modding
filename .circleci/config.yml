@@ -2,28 +2,22 @@ version: 2.1
 orbs:
     node: circleci/node@2.1.1
 jobs:
-    build:
+    build-and-update-wiki:
         executor:
             name: node/default
         steps:
             - checkout
             - node/install-packages
-            - run:
-                  command: git submodule update --init
-            - run:
-                  command: git branch --set-upstream-to=origin/circleci-project-setup circleci-project-setup
-            - run:
-                  command: npm run start
-    update-wiki:
-        - run:
-              command: cd ./wiki && git checkout master && git add -A && git commmit -m "Compiled wiki" && git push
-        - run:
-              command: git add -A && git commit -m "Updated wiki submodule" && git push
+            - run: git config --global user.email circleci@circleci
+            - run: git config --global user.name CircleCI
+            - run: git submodule update --init
+            - run: npm run start
+            - run: cd ./wiki && git checkout master && git add -A && git commit -m "Compiled wiki" && git push
+            - run: git add wiki && git commit -m "Updated wiki submodule [skip ci]" && git push
 workflows:
     build_and_update:
         jobs:
-            - build
-            - update-wiki:
+            - build-and-update-wiki:
                   filters:
                       branches:
                           only:
