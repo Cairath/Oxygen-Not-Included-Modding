@@ -111,8 +111,8 @@ namespace ONIMod
 ```
 
 ### Testing the mod
-Once you compile the mod, you have to move it to the game mod directory. 
-In `%USERPROFILE%\Documents\Klei\OxygenNotIncluded\mods` there are three folders:
+Once you compile the mod (remember to compile it as `Release` version!), you have to move it to the game mod directory. 
+In `%USERPROFILE%\Documents\Klei\OxygenNotIncluded\mods` there are three folders (if there aren't, please create them):
 * `\Dev` - this is where mods in development should go. If a mod in this folder crashes, it will not be disabled automatically when the game restarts.
 * `\Steam` - mods to which you subscribe on Steam are automatically downloaded there. Mods will be auto-disabled upon a mod crash (of any mod).
 * `\Local` - locally installed mods, otherwise behaves as `\Steam`. 
