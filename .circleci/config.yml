@@ -12,8 +12,8 @@ jobs:
             - run: git config --global user.name CircleCI
             - run: git submodule update --init
             - run: npm run start
-            - run: cd ./wiki && git checkout master && git add -A && git commit -m "Compiled wiki" && git push
-            - run: git add wiki && git commit -m "Updated wiki submodule [skip ci]" && git push
+            - run: cd ./wiki && git checkout master && git add -A && (git diff-index --quiet HEAD || git commit -m "Compiled wiki" && git push)
+            - run: git commit -am "Updated wiki submodule [skip ci]" && git push
 workflows:
     build_and_update:
         jobs:
