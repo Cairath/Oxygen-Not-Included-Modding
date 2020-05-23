@@ -101,7 +101,9 @@ gulp.task("toc", async () => {
 
     for (const pageToC of ToCs) {
         masterToC.push({
-            content: `[${pageToC.fileName}](${pageToC.fileName})`,
+            content: `[${pageToC.fileName.replace(/_/g, " ")}](${
+                pageToC.fileName
+            })`,
             lvl: 1,
         });
 
