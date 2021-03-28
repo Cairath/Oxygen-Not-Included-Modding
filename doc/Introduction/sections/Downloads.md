@@ -9,7 +9,22 @@ Below you will find links to the required tools. All tools not marked as optiona
 This will be your primary tool for editing C# and browsing game code.  
 *Installation instructions will be presented in the next chapter of this guide.*
 
-Non-Windows platforms will need to use an alternative, but this will not be covered in this guide.
+Non-Windows platforms will need to use an alternative, but this will not be much covered in this guide.
+
+You could download dotnet sdk ,find a dll file named `csc.dll`(even if you're using Linux! do NOT convert `csc.dll` to `csc.dll.so` or `libcsc.so` automatically!), execute commands like
+```
+/path/to/dotnet /path/to/csc.dll -nologo -t:library \
+  -r:'../OxygenNotIncluded_Data/Managed/0Harmony.dll' \
+  -r:'../OxygenNotIncluded_Data/Managed/System.dll' \
+  -r:'../OxygenNotIncluded_Data/Managed/UnityEngine.dll' \
+  -r:'../OxygenNotIncluded_Data/Managed/UnityEngine.CoreModule.dll' \
+  -r:'../OxygenNotIncluded_Data/Managed/mscorlib.dll' \
+  -r:'../OxygenNotIncluded_Data/Managed/Assembly-CSharp.dll' \
+  -out:"your-mod.dll"\
+  -optimize \
+  "your-source-file.cs"
+```
+to compile your code.
 
 ### dotPeek
 ***Download link:*** https://www.jetbrains.com/decompiler/download/#section=web-installer  
