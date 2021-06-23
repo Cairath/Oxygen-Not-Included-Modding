@@ -27,7 +27,8 @@ gulp.task("gitdown", async () => {
         const stats = fs.statSync(entry);
 
         let target = entry;
-        let targetName = basename(target, ".md");
+        let targetNoSpaces = target.replace(/ /g, "_");
+        let targetName = basename(targetNoSpaces, ".md");
         if (stats.isDirectory()) {
             target = join(target, "index.md");
         }
@@ -39,6 +40,7 @@ gulp.task("gitdown", async () => {
 
         output.push(outputFile);
     }
+
     const gitdownReadme = await Gitdown.readFile(
         join(process.cwd(), readmeSrc, readmeName)
     );
@@ -100,10 +102,11 @@ gulp.task("toc", async () => {
     ];
 
     for (const pageToC of ToCs) {
+        const title = pageToC.fileName.replace(/_/g, " ");
+        const url = pageToC.fileName.replace(/_/g, "-");
+
         masterToC.push({
-            content: `[${pageToC.fileName.replace(/_/g, " ")}](${
-                pageToC.fileName
-            })`,
+            content: `[${title}](${url})`,
             lvl: 1,
         });
 
@@ -115,7 +118,7 @@ gulp.task("toc", async () => {
                     (pageItem.content as string).indexOf("](") + 2;
                 pageItem.content =
                     pageItem.content.substring(0, linkEndIdx) +
-                    pageToC.fileName +
+                    url +
                     pageItem.content.substring(linkEndIdx);
                 masterToC.push(pageItem);
             }

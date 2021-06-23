@@ -11,7 +11,7 @@ The uploader tool lets you add and modify your existing mods. You need to prepar
 * Mod description ([using Steam formatting](https://steamcommunity.com/comment/Announcement/formattinghelp))
 * A thumbnail image
   
-After filling all the fields, choose applicable tags and hit `Publish!`. Keep in mind, the tool is not perfect and sometimes throws a moody fit - keep a backup of your lenghty description in notepad to avoid excessive frustration.
+After filling all the fields, choose applicable tags (especially the compatibility tags: **Base Game** and/or **Spaced Out!**) and hit `Publish!`. Keep in mind, the tool is not perfect and sometimes throws a moody fit - keep a backup of your lenghty description in notepad to avoid excessive frustration.
 
 ### Making the mod public
 If it is your first contribution to the Steam Workshop, your submission will be set to `private` and Steam will prompt you to accept terms of conditions. Once you do that, go to your mod page and then set the visibility to public.

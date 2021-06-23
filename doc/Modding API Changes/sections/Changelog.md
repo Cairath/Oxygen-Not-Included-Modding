@@ -1,4 +1,4 @@
-## Modding API Changes
+## Changelog
 
 ### The Beginning
 **The first official API, very-experimental**
