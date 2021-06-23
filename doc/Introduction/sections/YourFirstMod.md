@@ -13,7 +13,7 @@ Start Visual Studio. On the main screen select `Create a new project`, then foll
 
 * **Without template**
   
-  Choose `Class Library (.NET Framework)` in the template list. Click `next` then **select .NET Framework 4.0 in the bottom dropdown.**
+  Choose `Class Library (.NET Framework)` in the template list. Click `next` then **select .NET Framework 4.7.1 in the bottom dropdown.**
 
 Click next, then choose names for your solution and project. Solution is a collection of projects, and many of us have one solution called something along the lines of `ONI Mods` with many projects in it (one project = a single mod). If you prefer to have one solution per mod, that's fine too!
 
@@ -119,7 +119,7 @@ In `%USERPROFILE%\Documents\Klei\OxygenNotIncluded\mods` there are three folders
 
 On other platforms, you can find the directories here:
 * Linux: `~/.config/unity3d/Klei/OxygenNotIncluded/mods`
-* Mac: *you've made a bad life decision, you'll figure it out*
+* Mac: `~/Library/Application Support/unity.Klei.Oxygen Not Included/mods` *you've made a bad life decision, you'll have a lot of figuring out to do*
 
 Each mod should have its own separate folder, so for example your `ExampleMod` path would look like this:
 `...\Klei\OxygenNotIncluded\mods\Dev\ExampleMod\ExampleMod.dll`. Once you've confirmed the file is in the correct place, you can launch the game and click the `MODS` button. Find your mod on the list, enable it then allow the game to restart.

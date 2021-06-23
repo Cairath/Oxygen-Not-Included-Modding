@@ -6,7 +6,7 @@ You will find the uploader in your Steam library under the name of `Oxygen Not I
 
 ### Uploading the mod
 The uploader tool lets you add and modify your existing mods. You need to prepare: 
-* Mod files (follow instructions from the chapter above: the folder containing the `.dll`, not zipped)
+* Mod files (follow instructions from the chapter above: the folder containing the `.dll`, not zipped. Only the mod files! No files belonging to the game!)
 * Official mod name (how you name the mod on Steam is how the players will see it in-game)
 * Mod description ([using Steam formatting](https://steamcommunity.com/comment/Announcement/formattinghelp))
 * A thumbnail image
