@@ -5,7 +5,7 @@ Place it in your mod's root directory: `YourModName\mod.yaml`, and in the direct
 The file template looks as follows:
 ```yaml
 supportedContent: EXPANSION1_ID 
-minimumSupportedVersion: 468097
+minimumSupportedBuild: 468097
 version: "1.3.42"
 APIVersion: 2
 ```
@@ -14,6 +14,6 @@ APIVersion: 2
   * ALL - both base game and Spaced Out
   * VANILLA_ID - only base game
   * EXPANSION1_ID - only Spaced Out
-* **minimumSupportedVersion**: minimum game version for which the mod will be loaded
+* **minimumSupportedBuild**: minimum game version for which the mod will be loaded
 * **version**: an arbitrary string that will be displayed to users on the mod screen, automatically prefixed with 'v' (v1.3.42). Since this is just a text value, you can define your custom version format.
 * **APIVersion**: all mods that include a .dll file (so anything aside from translations) must be set to 2 to specify you have upgraded your mod to use Harmony 2. If not set, the mod will not load.
