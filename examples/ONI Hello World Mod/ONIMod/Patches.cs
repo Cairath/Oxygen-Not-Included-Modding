@@ -1,17 +1,9 @@
-using Harmony;
+using HarmonyLib;
 
 namespace ONIMod
 {
 	public class Patches
 	{
-		public static class Mod_OnLoad
-		{
-			public static void OnLoad()
-			{
-				Debug.Log("Hello world!");
-			}
-		}
-
 		[HarmonyPatch(typeof(Db))]
 		[HarmonyPatch("Initialize")]
 		public class Db_Initialize_Patch

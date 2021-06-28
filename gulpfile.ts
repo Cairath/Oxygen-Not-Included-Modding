@@ -216,7 +216,7 @@ gulp.task("toc", async () => {
 gulp.task("clean", () => gulp.src("wiki/*").pipe(gulpClean()));
 
 gulp.task("copy-resources", () =>
-    gulp.src("doc/*/sections/*/**").pipe(gulpCopy("wiki", { prefix: 3 }))
+    gulp.src("doc/*/*/sections/*/**").pipe(gulpCopy("wiki", { prefix: 4 }))
 );
 
 gulp.task("doc", gulp.series("clean", "gitdown", "toc", "copy-resources"));

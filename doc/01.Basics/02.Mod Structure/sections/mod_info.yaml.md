@@ -6,7 +6,7 @@ The file template looks as follows:
 ```yaml
 supportedContent: EXPANSION1_ID 
 minimumSupportedBuild: 468097
-version: "1.3.42"
+version: 1.3.42
 APIVersion: 2
 ```
 

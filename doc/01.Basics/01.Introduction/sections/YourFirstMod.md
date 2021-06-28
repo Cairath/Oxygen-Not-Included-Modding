@@ -9,7 +9,8 @@ Start Visual Studio. On the main screen select `Create a new project`, then foll
 
 * **Using project template**
   
-  Search for `ONI Mod` in the template list. If it does not appear make sure you imported the template correctly and restart VS. Click `next` to continue.
+  Search for `ONI Mod` in the template list. Do **not** select `Place solution and project in the same directory`.  
+  If the template does not appear on the list, make sure you imported the template correctly and restart VS. Click `next` to continue.
 
 * **Without template**
   
@@ -35,7 +36,7 @@ Once your project is created you will see a bunch of errors. It's time to import
   * `UnityEngine.ImageConversionModule.dll`
 
 Once all files are in place, try to build your project (on the sidebar, right click the project name and click `Build`). It should now recognize all files and build with no issues.
-If you have issues with references not being found - please restart Visual Studio.
+If you have issues with references not being found - please restart Visual Studio or re-add the references manually.
 
 ### Game log
 The game output log is located in `%USERPROFILE%\AppData\LocalLow\Klei\Oxygen Not Included\player.log`. This file will be your friend - create a shortcut somewhere accessible. Open with Notepad++. More details about how to work with the log will be published on another page.
@@ -43,32 +44,11 @@ The game output log is located in `%USERPROFILE%\AppData\LocalLow\Klei\Oxygen No
 ### First look at the code
 At this point you should be familiar with Harmony patches. If you aren't -- go back and read the documentation. One of the main things you will be doing with modding is writing patches to modify the original game logic. There are a few ways of doing it, and now we'll cover the most basic one.
 
-This is an example of a patch class (file from the example project, [available here](https://github.com/Cairath/Oxygen-Not-Included-Modding/blob/master/examples/ONI%20Hello%20World%20Mod/ONIMod/Patches.cs)):
+`Db_Initialize_Patch` is an example of a patch class (file from the example project, [available here](https://github.com/Cairath/Oxygen-Not-Included-Modding/blob/master/examples/ONI%20Hello%20World%20Mod/ONIMod/Patches.cs)):
 ```cs
-[HarmonyPatch(typeof(Db))]
-[HarmonyPatch("Initialize")]
-public class Db_Initialize_Patch
-{
-    public static void Prefix()
-    {
-        Debug.Log("I execute before Db.Initialize!");
-    }
+# Patches.cs
 
-    public static void Postfix()
-    {
-        Debug.Log("I execute after Db.Initialize!");
-    }
-}
-```
-
-This one contains two patches (last chance to go read Harmony documentation!) that will be executed before and after `Db.Initialize()` in the original code. You can see the results of `Debug.Log()` in the aforementioned game log file.
-
-All patches need to reside somewhere - usually it's a bigger class with patches, or sometimes a few smaller ones if there's a logical need to divide them. Where you put the patch classes does not matter - but keep it tidy -- you'll have to return to the code later at some point, so don't do anything the future you will regret.
-
-The resulting file `Patches.cs` contains one `Patches` class which holds all the patches we'll use in the example mod. You do not need to do anything to register or execute them - the game will pick them up on its own and apply them when the game starts.
-
-```cs
-using Harmony;
+using HarmonyLib;
 
 namespace ONIMod
 {
@@ -92,6 +72,12 @@ namespace ONIMod
 }
 ```
 
+`Db_Initialize_Patch` contains two patches (last chance to go read Harmony documentation!) that will be executed before and after `Db.Initialize()` in the original code. You can see the results of `Debug.Log()` in the aforementioned game log file.
+
+All patches need to reside somewhere - usually it's a bigger class with patches (in this case the `Patches` class), or sometimes a few smaller ones if there's a logical need to divide them. Where you put the patch classes does not matter - but keep it tidy -- you'll have to return to the code later at some point, so don't do anything the future you will regret.
+
+The resulting file `Patches.cs` has the `Patches` class which holds all the patches we'll use in the example mod. You do not need to do anything to register or execute them - by default the game will pick them up on its own and apply them when it starts. If you want to have more control over the patching process or need to do something before or after it, please add [UserMod2](Mod-Structure/#usermod2) to your reading list.
+
 ### Testing the mod
 Once you compile the mod (remember to compile it as `Release` version!), you have to move it to the game mod directory. 
 In `%USERPROFILE%\Documents\Klei\OxygenNotIncluded\mods` there are three folders (if there aren't, please create them):
@@ -101,7 +87,7 @@ In `%USERPROFILE%\Documents\Klei\OxygenNotIncluded\mods` there are three folders
 
 On other platforms, you can find the directories here:
 * Linux: `~/.config/unity3d/Klei/OxygenNotIncluded/mods`
-* Mac: `~/Library/Application Support/unity.Klei.Oxygen Not Included/mods` *you've made a bad life decision, you'll have a lot of figuring out to do*
+* Mac: `~/Library/Application Support/unity.Klei.Oxygen Not Included/mods` *(you've made a bad life decision, you'll have a lot of figuring out to do)*
 
 Each mod should have its own separate folder, so for example your `ExampleMod` path would look like this:
 `...\Klei\OxygenNotIncluded\mods\Dev\ExampleMod\ExampleMod.dll`. Once you've confirmed the file is in the correct place, you can launch the game and click the `MODS` button. Find your mod on the list, enable it then allow the game to restart.
