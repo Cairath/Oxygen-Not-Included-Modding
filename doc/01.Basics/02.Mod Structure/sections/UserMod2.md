@@ -5,7 +5,7 @@ As of [The Big Merge Update](https://forums.kleientertainment.com/forums/topic/1
 Implementing this class is optional, and the game will default to simply calling `Harmony.PatchAll()` for you if you choose not to. However, if you wish to control patching, such as patching conditionally, or want code to execute outside of the patching process, you will need to have an implementation.
 
 ### Implementation
-Long story short, the game will scan for any classes which extend `UserMod2` (in namespace `KMod`), and, if found, instantiate it (with a few [caveats](#usermod2-notes)). Your implementation class can be any name and in any namespace of your choosing, and should look something like this:
+Long story short, the game will scan for any classes which extend `UserMod2` (in namespace `KMod`), and, if found, instantiate it (with a few [caveats](Mod-Structure#usermod2-notes)). Your implementation class can be any name and in any namespace of your choosing, and should look something like this:
 
 ```cs
 using KMod;
@@ -41,7 +41,7 @@ public override void OnLoad(Harmony harmony)
 
 Don't forget `using HarmonyLib` if your editor complains about `Harmony` being unknown.
 
-Breaking it down, it simply logs a message to the game's log, runs all patches, then logs another message. Nothing too fancy, but it gives your mod a lot of power to do things. The method is also passed a `Harmony` instance for your mod, which will use the `staticID` from your [mod.yaml](Mod_Structure#mod-yaml) if you provided one.
+Breaking it down, it simply logs a message to the game's log, runs all patches, then logs another message. Nothing too fancy, but it gives your mod a lot of power to do things. The method is also passed a `Harmony` instance for your mod, which will use the `staticID` from your [mod.yaml](Mod-Structure#mod-yaml) if you provided one.
 
 ### OnAllModsLoaded Method
 Another method you can optionally implement is `OnAllModsLoaded`, which, as the name implies, is called after all mods have been loaded. This is lesser used, but still a handy tool if you're interested in what other mods the game has loaded for any reason.
