@@ -51,7 +51,9 @@ gulp.task("gitdown", async () => {
 
             for (const pageName of categoryPages) {
                 pagePath = join(categoryPath, pageName, "index.md");
-                pageOutputFilename = basename(pageName.replace(/ /g, "_"));
+                pageOutputFilename = basename(
+                    pageName.replace(/ /g, "_")
+                ).substr(3);
 
                 await generateGitdownPage(
                     pagePath,
