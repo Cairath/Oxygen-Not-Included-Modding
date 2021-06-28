@@ -2,7 +2,7 @@
 
 As of [The Big Merge Update](https://forums.kleientertainment.com/forums/topic/131141-spaced-out-the-big-merge-update-469287/), a new class became available for modders: `UserMod2`.
 
-Implementing this class is optional, and the game will default to simply calling `Harmony.PatchAll()` for you if you choose not to. However, if you wish to control patching, such as patching conditionally, or want code to execute outside of the patching process, you will need to have an implementation.
+Implementing this class is optional, and the game will default to simply calling `Harmony.PatchAll()` for you if you choose not to. However, if you wish to control patching, such as patching conditionally, or if want code to execute outside of the patching process, you will need to have an implementation.
 
 ### Implementation
 Long story short, the game will scan for any classes which extend `UserMod2` (in namespace `KMod`), and, if found, instantiate it (with a few [caveats](Mod-Structure#usermod2-notes)). Your implementation class can be any name and in any namespace of your choosing, and should look something like this:
@@ -22,7 +22,7 @@ namespace ONIMod
 Easy enough, right? The game will discover this file and treat your mod a bit differently. If you want to customize this loading, see below.
 
 ### OnLoad Method
-The most-used method on this class will be the `OnLoad` method, which is invoked when your mod DLL is loaded by the game. This is great if you want to execute code at load-time, such as code before/after patching or controlling patches conditionally. This is optional, but a 
+The most-used method on this class will be the `OnLoad` method, which is invoked when your mod DLL is loaded by the game. This is great if you want to execute code at load-time, such as code before/after patching or controlling patches conditionally. If not specified, the game will simply apply all patches for you.
 
 Let's add a new method to our class:
 ```cs
@@ -31,8 +31,8 @@ public override void OnLoad(Harmony harmony)
     // do some stuff before patching
     Debug.Log("OnLoad: Before patches!");
 
-    // patch
-    harmony.PatchAll();
+    // let the game patch everything
+    base.OnLoad(harmony);
 
     // do some stuff after patching
     Debug.Log("OnLoad: After patches!");
