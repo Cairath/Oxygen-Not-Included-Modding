@@ -39,7 +39,7 @@ Once all files are in place, try to build your project (on the sidebar, right cl
 If you have issues with references not being found - please restart Visual Studio or re-add the references manually.
 
 ### Game log
-The game output log is located in `%USERPROFILE%\AppData\LocalLow\Klei\Oxygen Not Included\player.log`. This file will be your friend - create a shortcut somewhere accessible. Open with Notepad++. More details about how to work with the log will be published on another page.
+The game output log is located in `%USERPROFILE%\AppData\LocalLow\Klei\Oxygen Not Included\player.log`. This file will be your friend - create a shortcut somewhere accessible. Open with Notepad++. More details about how to work with the log will be published on another page [todo](todo).
 
 ### First look at the code
 At this point you should be familiar with Harmony patches. If you aren't -- go back and read the documentation. One of the main things you will be doing with modding is writing patches to modify the original game logic. There are a few ways of doing it, and now we'll cover the most basic one.
@@ -78,10 +78,35 @@ All patches need to reside somewhere - usually it's a bigger class with patches 
 
 The resulting file `Patches.cs` has the `Patches` class which holds all the patches we'll use in the example mod. You do not need to do anything to register or execute them - by default the game will pick them up on its own and apply them when it starts. If you want to have more control over the patching process or need to do something before or after it, please add [UserMod2](Mod-Structure/#usermod2) to your reading list.
 
+### mod.yaml and mod_info.yaml
+The mods use two metadata files - they are fully described in the next chapter.
+
+You need to create:
+
+`mod.yaml` - while the mod will work without it, do not omit it!
+```yaml
+title: "Your Mod Title" 
+description: "Something About Your Mod"
+staticID: "yourSuperCoolMod" 
+```
+
+`mod_info.yaml` - this file is absolutely necessary and the mod will not work without it
+```yaml
+supportedContent: ALL # possible options: ALL, EXPANSION1_ID, VANILLA_ID
+minimumSupportedBuild: 468097 # the lowest game version that will load the mod
+version: 1.0.0 # version of your mod, displayed on the mod list. for your and users' info
+APIVersion: 2 # required to specify that the mod is using Harmony 2 and has been upgraded for the mergedown changes
+```
+
+For full information about these files, their properties and the mod structure please read [this chapter](Mod-Structure).
+
 ### Testing the mod
 Once you compile the mod (remember to compile it as `Release` version!), you have to move it to the game mod directory. 
+
+You want to move **only** your mod's dll and not any of the game files that are being referenced. Also include the `mod_info.yaml` and `mod.yaml` mentioned above. 
+
 In `%USERPROFILE%\Documents\Klei\OxygenNotIncluded\mods` there are three folders (if there aren't, please create them):
-* `\Dev` - this is where mods in development should go. If a mod in this folder crashes, it will not be disabled automatically when the game restarts.
+* `\Dev` - this is where mods in development should go. If a mod in this folder crashes, it will not be disabled automatically when the game restarts. Use this for testing.
 * `\Steam` - mods to which you subscribe on Steam are automatically downloaded there. Mods will be auto-disabled upon a mod crash (of any mod).
 * `\Local` - locally installed mods, otherwise behaves as `\Steam`. 
 
@@ -90,7 +115,12 @@ On other platforms, you can find the directories here:
 * Mac: `~/Library/Application Support/unity.Klei.Oxygen Not Included/mods` *(you've made a bad life decision, you'll have a lot of figuring out to do)*
 
 Each mod should have its own separate folder, so for example your `ExampleMod` path would look like this:
-`...\Klei\OxygenNotIncluded\mods\Dev\ExampleMod\ExampleMod.dll`. Once you've confirmed the file is in the correct place, you can launch the game and click the `MODS` button. Find your mod on the list, enable it then allow the game to restart.
+`...\Klei\OxygenNotIncluded\mods\Dev\ExampleMod\`
+- `ExampleMod.dll`
+- `mod.yaml`
+- `mod_info.yaml`
+
+Once you've confirmed the files are in the correct place, you can launch the game and click the `MODS` button. Find your mod on the list, enable it then allow the game to restart.
 
 To verify the mod worked, you should open the game log and look for the two lines that your mod printed - `I execute before Db.Initialize!` and `I execute after Db.Initialize!`.
 
