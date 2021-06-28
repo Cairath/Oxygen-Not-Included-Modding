@@ -76,7 +76,7 @@ namespace ONIMod
 
 All patches need to reside somewhere - usually it's a bigger class with patches (in this case the `Patches` class), or sometimes a few smaller ones if there's a logical need to divide them. Where you put the patch classes does not matter - but keep it tidy -- you'll have to return to the code later at some point, so don't do anything the future you will regret.
 
-The resulting file `Patches.cs` has the `Patches` class which holds all the patches we'll use in the example mod. You do not need to do anything to register or execute them - by default the game will pick them up on its own and apply them when it starts. If you want to have more control over the patching process or need to do something before or after it, please add [UserMod2](Mod-Structure/#usermod2) to your reading list.
+The resulting file `Patches.cs` has the `Patches` class which holds all the patches we'll use in the example mod. You do not need to do anything to register or execute them - by default the game will pick them up on its own and apply them when it starts. If you want to have more control over the patching process or need to do something before or after it, please add [UserMod2](Mod-Structure#usermod2) to your reading list.
 
 ### mod.yaml and mod_info.yaml
 The mods use two metadata files - they are fully described in the next chapter.
