@@ -39,7 +39,7 @@ Once all files are in place, try to build your project (on the sidebar, right cl
 If you have issues with references not being found - please restart Visual Studio or re-add the references manually.
 
 ### Game log
-The game output log is located in `%USERPROFILE%\AppData\LocalLow\Klei\Oxygen Not Included\player.log`. This file will be your friend - create a shortcut somewhere accessible. Open with Notepad++. More details about how to work with the log will be published on another page [todo](todo).
+The game output log is located in `%USERPROFILE%\AppData\LocalLow\Klei\Oxygen Not Included\player.log`. This file will be your friend - create a shortcut somewhere accessible. Open with Notepad++. More details about how to work with the log will be published on another page.
 
 ### First look at the code
 At this point you should be familiar with Harmony patches. If you aren't -- go back and read the documentation. One of the main things you will be doing with modding is writing patches to modify the original game logic. There are a few ways of doing it, and now we'll cover the most basic one.

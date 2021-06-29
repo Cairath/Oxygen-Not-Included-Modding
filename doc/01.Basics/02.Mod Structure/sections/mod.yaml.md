@@ -12,3 +12,5 @@ staticID: "yourSuperCoolMod"
 * **title**: set this to your mod name in the Steam Workshop. In case of non-Steam mod installation, this is what will be displayed in game as the mod title
 * **description**: currently not used in game, but perhaps will be one day!
 * **staticID**: a mod's unique identifier. This needs to be globally unique, across ALL mods. Can be as simple as your mod name (with no spaces), or you can prefix it with your name. Once you publish the mod - don't change this value. This is used for mod compatibility - the game will use this ID to create and name a Harmony instance for your mod, and other mods can refer to yours by this ID.
+
+**Note:** make sure the file is saved with UTF-8 (no signature) encoding. Visual Studio uses UTF-8 with BOM by default, which will cause an error in game.
