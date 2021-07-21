@@ -51,9 +51,7 @@ gulp.task("gitdown", async () => {
 
             for (const pageName of categoryPages) {
                 pagePath = join(categoryPath, pageName, "index.md");
-                pageOutputFilename = basename(
-                    pageName.replace(/ /g, "_")
-                ).substr(3);
+                pageOutputFilename = basename(pageName).substr(3);
 
                 await generateGitdownPage(
                     pagePath,
@@ -62,10 +60,7 @@ gulp.task("gitdown", async () => {
                 );
             }
         } else {
-            pageOutputFilename = basename(
-                categoryPath.replace(/ /g, "_"),
-                ".md"
-            );
+            pageOutputFilename = basename(categoryPath, ".md");
 
             await generateGitdownPage(pagePath, pageOutputFilename, "default");
         }
@@ -160,8 +155,8 @@ gulp.task("toc", async () => {
                               ]
                             : [...contentsBefore, ...contentsAfter];
 
-                        const title = fileName.replace(/_/g, " ");
-                        const url = fileName.replace(/_/g, "-");
+                        const title = fileName;
+                        const url = fileName.replace(/ /g, "-");
 
                         let idx = masterToC.findIndex(
                             (c) => c.name === category
@@ -173,7 +168,6 @@ gulp.task("toc", async () => {
 
                         for (let pageItem of contentsToC.json) {
                             if (pageItem.lvl == 2) {
-                                //todo was <=2
                                 pageItem = toc.linkify(pageItem);
 
                                 const linkEndIdx =
