@@ -41,6 +41,17 @@ Some of the **Symbols** in a build file will have multiple **Frames** like this:
 
 Generally a **Symbol** that has multiple **Frames** is used to group all of the sprites that will be swapped during an animation. So in the case of the Conveyor Loader, you can see the yellow light has an On (Index 1) and Off (Index 2) sprite under the symbol named `opening`. This will be important to remember for later when we look at how the animation data makes the sprite blink.
 
+Each **Symbol** also has 4 flags that can be toggled to change how they behave in the game:
+
+* **Bloom**  
+  Toggles whether the bloom shader is used to render the sprite. This makes it glow.
+* **OnLight**  
+  Toggles whether the symbol is used as a "on light" which is only shown when a building is on.
+* **SnapTo**  
+  Toggles whether the symbol is marked as a snapping point for other animations to snap to.
+* **Foreground**  
+  Toggles whether the symbol appears in a foreground layer so that it overlaps most other objects.
+
 ### The Anim File
 
 The final piece of the kanim puzzle is the file that tells the game where (and when) all of the sprites go.  
