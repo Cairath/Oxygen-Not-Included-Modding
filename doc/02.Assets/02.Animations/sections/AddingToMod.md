@@ -1,5 +1,8 @@
 ## Adding Animations to a Mod
 
+The mod loading system in Oxygen Not Included will automatically detect the asset files and add them to the game assets.  
+They just need to be put in the correct place in your mod folder.
+
 Each of the animations you want to include with a mod must be put in their own folder like this:
 ```
 <mod_folder>/anim/assets/myanim1/myanim1_0.png
