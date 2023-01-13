@@ -11,8 +11,7 @@ An example of a complete set of animation files:
 * `hqbase_anim.bytes`  
   This is the file that contains all of the animations for the Printing Pod. (i.e. Keyframes)
 
-The name for an animation does not always match the name you see in the game, so it will be very useful to extract all of the game's textures at once to allow visual searching through the graphics.  
-See [Extracting Assets](Animations#ExtractingAssets) for instructions.
+The name for an animation does not always match the name you see in the game, so it will be very useful to extract all of the game's textures at once to allow visual searching through the graphics.
 
 You can find the texture files for all of the animations in the `<Extracted Assets>/Texture2D` folder.
 
