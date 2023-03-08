@@ -6,10 +6,6 @@
     </h1>
 </div>
 
-## WARNING
-
-Currently the game is undergoing a merge of Spaced Out and Base Game codebases. There are major breaking changes between legacy (base game) and updated modding system (Spaced Out). Exact differences are described in [Modding API Changes](Miscellaneous#modding-api-changes). It is recommended to wait until the merge is complete before you start working on new base game mods. Seriously, if you do it now, it'll all be broken very soon ;)
-
 ## Preamble
 
 In this guide, you will be given a quick tutorial on the basics of modding, and getting your mod up and running. As well, you can read on for in-depth explanations on the various aspects of mods of varying difficulties.
